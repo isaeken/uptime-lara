@@ -10,6 +10,8 @@ class Metric extends Model
 {
     use HasFactory;
 
+    const UPDATED_AT = null;
+
     protected $table = 'metrics';
 
     protected $fillable = [
