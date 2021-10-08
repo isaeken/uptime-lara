@@ -22,9 +22,19 @@ export default class Dashboard extends Component {
         return this.state.monitors.map((monitor) => {
             console.log(monitor)
             return (
-                <div className="p-3 flex hover:bg-gray-100">
+                <div className="p-3 flex items-center hover:bg-gray-100">
                     <div>
                         {monitor.name}
+                    </div>
+                    <div className="flex ml-auto space-x-1">
+                        {monitor.last_metrics.map((metric) => {
+                            let className = "w-1 h-5 rounded ";
+                            return (
+                                <div className={metric.up ? className + "bg-green-400" : className + "bg-red-400"}>
+
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
             );
