@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         if (app()->environment() !== 'production') {
             $this->call(UserSeeder::class);
             $this->call(MonitorSeeder::class);
+            $this->call(MetricSeeder::class);
         }
     }
 }

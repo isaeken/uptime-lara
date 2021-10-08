@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\AsCollection;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Monitor extends Model
@@ -33,5 +35,15 @@ class Monitor extends Model
     public function user(): HasOne
     {
         return $this->hasOne(User::class);
+    }
+
+    public function metrics(): HasMany
+    {
+        return $this->hasMany(Metric::class);
+    }
+
+    public function lastMetrics(int $limit = 10): Collection
+    {
+        return $this->metrics()->orderByDesc('id')->limit($limit)->get();
     }
 }
