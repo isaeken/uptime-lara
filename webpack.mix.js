@@ -14,6 +14,7 @@ const mix = require('laravel-mix');
 mix
     .setPublicPath('public_html')
     .js('resources/js/app.js', 'js')
+    .react()
     .postCss('resources/css/app.css', 'css', [
         require('postcss-import'),
         require('tailwindcss'),
@@ -21,4 +22,7 @@ mix
 
 if (mix.inProduction()) {
     mix.version();
+}
+else {
+    mix.browserSync('127.0.0.1:8000');
 }
