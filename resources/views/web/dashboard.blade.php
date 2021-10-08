@@ -1,3 +1,3 @@
 <x-app-layout>
-    Dashboard
+    <div id="dashboard"></div>
 </x-app-layout>

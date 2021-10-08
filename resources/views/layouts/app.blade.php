@@ -13,10 +13,15 @@
         @livewireStyles
 
         <!-- Scripts -->
+        <script type="text/javascript">
+            window.app = {!! json_encode([
+                'token' => auth()->user()->token,
+            ]) !!};
+        </script>
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+        <div class="min-h-screen bg-gray-100 text-gray-900">
             <main>
                 {{ $slot }}
             </main>

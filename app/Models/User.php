@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -27,6 +28,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'token',
     ];
 
     /**
@@ -39,6 +41,7 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+        'token',
     ];
 
     /**
@@ -57,7 +60,19 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'token',
     ];
+
+    public function getTokenAttribute(): string
+    {
+        if ($this->attributes['token'] == null) {
+            $this->update([
+                'token' => Str::random(),
+            ]);
+        }
+
+        return $this->attributes['token'];
+    }
 
     public function monitors(): HasMany
     {
