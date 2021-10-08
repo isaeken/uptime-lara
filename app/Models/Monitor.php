@@ -32,6 +32,10 @@ class Monitor extends Model
         'upside_down' => 'boolean',
     ];
 
+    protected $appends = [
+        'last_metrics',
+    ];
+
     public function user(): HasOne
     {
         return $this->hasOne(User::class);
@@ -42,8 +46,8 @@ class Monitor extends Model
         return $this->hasMany(Metric::class);
     }
 
-    public function lastMetrics(int $limit = 10): Collection
+    public function getLastMetricsAttribute(int|null $limit = null): Collection
     {
-        return $this->metrics()->orderByDesc('id')->limit($limit)->get();
+        return $this->metrics()->orderByDesc('id')->limit($limit ?? 10)->get();
     }
 }
