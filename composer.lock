@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cad72a23d0e029d8dac7022d88d552d",
+    "content-hash": "dc2fd8eb8f74241c475b37326c06c578",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1172,6 +1172,66 @@
                 "source": "https://github.com/hanneskod/classtools/tree/1.0"
             },
             "time": "2020-03-05T20:41:28+00:00"
+        },
+        {
+            "name": "isaeken/loops",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/isaeken/loops.git",
+                "reference": "77f88d72acf50cb79e133b123a61d6698b456997"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/isaeken/loops/zipball/77f88d72acf50cb79e133b123a61d6698b456997",
+                "reference": "77f88d72acf50cb79e133b123a61d6698b456997",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "pestphp/pest": "^1.20"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "IsaEken\\Loops\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "İsa Eken",
+                    "email": "hello@isaeken.com.tr",
+                    "homepage": "https://www.isaeken.com.tr",
+                    "role": "Founder"
+                }
+            ],
+            "description": "Basic loops library",
+            "homepage": "https://github.com/isaeken/loops",
+            "keywords": [
+                "isaeken",
+                "library",
+                "loops"
+            ],
+            "support": {
+                "issues": "https://github.com/isaeken/loops/issues",
+                "source": "https://github.com/isaeken/loops/tree/v1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/isaeken",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-09-30T16:37:13+00:00"
         },
         {
             "name": "jaybizzle/crawler-detect",

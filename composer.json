@@ -22,6 +22,7 @@
         "bensampo/laravel-enum": "^3.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "isaeken/loops": "^1.0",
         "laravel/framework": "^8.54",
         "laravel/jetstream": "^2.4",
         "laravel/sanctum": "^2.11",
