@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\MonitorController;
+use App\Http\Controllers\Api\MonitorTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth.token')->name('api.')->group(function () {
-    Route::apiResource('monitors', MonitorController::class);
+Route::name('api.')->group(function () {
+    Route::get('/monitor-types', [MonitorTypeController::class, 'index'])->name('monitor-types');
+
+    Route::middleware('auth.token')->group(function () {
+        Route::apiResource('monitors', MonitorController::class);
+    });
 });
+

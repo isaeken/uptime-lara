@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import {Button, Card, Divider, Empty, Skeleton} from "antd";
-import Create from "../Modals/Monitor/Create";
+import {Create} from "../Modals/Monitor/Create";
 import {PlusOutlined} from "@ant-design/icons";
 
 export default class Dashboard extends Component {

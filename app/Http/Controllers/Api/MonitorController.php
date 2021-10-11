@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MonitorRequest;
 use App\Models\Monitor;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,12 +24,16 @@ class MonitorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
-     * @return Response
+     * @param  MonitorRequest  $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(MonitorRequest $request): JsonResponse
     {
-        //
+        return response()->json(Monitor::create(collect($request->all())->merge([
+            'user_id' => auth()->id(),
+            'name' => $request->input('friendly_name'),
+            'monitor_data' => $request->all(),
+        ])->toArray()));
     }
 
     /**
