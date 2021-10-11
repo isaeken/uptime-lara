@@ -49,7 +49,17 @@ class Monitor extends Model
 
     public function getLastMetricsAttribute(int|null $limit = null): Collection
     {
-        return $this->metrics()->orderByDesc('id')->limit($limit ?? 10)->get();
+        $limit = $limit ?? 25;
+        $metrics = $this->metrics()->orderByDesc('id')->limit($limit)->get();
+
+        if ($metrics->count() < $limit) {
+            $x = $limit - $metrics->count();
+            for ($i = 0; $i < $x; $i++) {
+                $metrics->prepend(null);
+            }
+        }
+
+        return $metrics;
     }
 
     public function getAddressAttribute(): string

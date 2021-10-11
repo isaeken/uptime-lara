@@ -2,6 +2,7 @@ import {Component} from 'react';
 import {Button, Card, Divider, Empty, Skeleton, Space} from "antd";
 import {Create} from "../Modals/Monitor/Create";
 import {PlusOutlined} from "@ant-design/icons";
+import LastMetrics from "../Modals/Metric/LastMetrics";
 
 export default class Dashboard extends Component {
     constructor(props) {
@@ -28,6 +29,7 @@ export default class Dashboard extends Component {
         return this.state.monitors.map((monitor) => {
             return (
                 <div className="p-3 flex items-center hover:bg-gray-100 cursor-pointer" onClick={() => {
+                    console.log(monitor)
                     this.setState({
                         selectedMonitor: monitor,
                         selectedMonitorView: (
@@ -47,6 +49,9 @@ export default class Dashboard extends Component {
                                         <Button type="primary" danger>Delete</Button>
                                     </Space>
                                 </div>
+                                <div className="py-3">
+                                    <LastMetrics metrics={monitor.last_metrics} size="xl" count={25} />
+                                </div>
                             </>
                         ),
                     });
@@ -54,16 +59,7 @@ export default class Dashboard extends Component {
                     <div>
                         {monitor.name}
                     </div>
-                    <div className="flex ml-auto space-x-1">
-                        {monitor.last_metrics.map((metric) => {
-                            let className = "w-1 h-5 rounded ";
-                            return (
-                                <div className={metric.up ? className + "bg-green-400" : className + "bg-red-400"}>
-
-                                </div>
-                            )
-                        })}
-                    </div>
+                    <LastMetrics metrics={monitor.last_metrics} className="ml-auto" />
                 </div>
             );
         });
