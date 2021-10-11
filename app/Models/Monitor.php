@@ -34,6 +34,7 @@ class Monitor extends Model
 
     protected $appends = [
         'last_metrics',
+        'address',
     ];
 
     public function user(): HasOne
@@ -49,5 +50,17 @@ class Monitor extends Model
     public function getLastMetricsAttribute(int|null $limit = null): Collection
     {
         return $this->metrics()->orderByDesc('id')->limit($limit ?? 10)->get();
+    }
+
+    public function getAddressAttribute(): string
+    {
+        $types = ['ip', 'hostname', 'url'];
+        foreach ($types as $type) {
+            if ($this->monitor_data?->has($type)) {
+                return $this->monitor_data->get($type);
+            }
+        }
+
+        return 'unknown';
     }
 }

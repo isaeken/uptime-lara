@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Button, Card, Divider, Empty, Skeleton} from "antd";
+import {Button, Card, Divider, Empty, Skeleton, Space} from "antd";
 import {Create} from "../Modals/Monitor/Create";
 import {PlusOutlined} from "@ant-design/icons";
 
@@ -7,6 +7,8 @@ export default class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            selectedMonitor: null,
+            selectedMonitorView: '',
             monitors: null,
             modals: {
                 monitor_create: false,
@@ -25,7 +27,30 @@ export default class Dashboard extends Component {
     renderMonitorList() {
         return this.state.monitors.map((monitor) => {
             return (
-                <div className="p-3 flex items-center hover:bg-gray-100">
+                <div className="p-3 flex items-center hover:bg-gray-100 cursor-pointer" onClick={() => {
+                    this.setState({
+                        selectedMonitor: monitor,
+                        selectedMonitorView: (
+                            <>
+                                <h2 className="mb-0">
+                                    {monitor.name}
+                                </h2>
+                                <h3>
+                                    <a href={monitor.address} target="_blank">
+                                        {monitor.address}
+                                    </a>
+                                </h3>
+                                <div>
+                                    <Space>
+                                        <Button type="primary">Pause</Button>
+                                        <Button type="primary">Edit</Button>
+                                        <Button type="primary" danger>Delete</Button>
+                                    </Space>
+                                </div>
+                            </>
+                        ),
+                    });
+                }}>
                     <div>
                         {monitor.name}
                     </div>
@@ -75,9 +100,11 @@ export default class Dashboard extends Component {
                         </Card>
                     </div>
                     <div className="w-full lg:w-2/3 xl:w-3/4 p-2">
-                        <Empty description="No any monitors exists">
-                            <Button type="primary" onClick={() => {this.openMonitorCreateModal()}}>Create Now</Button>
-                        </Empty>
+                        {this.state.monitors === null ? <Skeleton active /> : ((this.state.monitors.length < 1) ? (
+                            <Empty description="No any monitors exists">
+                                <Button type="primary" onClick={() => {this.openMonitorCreateModal()}}>Create Now</Button>
+                            </Empty>
+                        ) : this.state.selectedMonitorView)}
                     </div>
                 </div>
             </div>
